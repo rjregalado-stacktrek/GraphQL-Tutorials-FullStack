@@ -6,7 +6,8 @@
  * system you define for your data. It was developed by Facebook in 
  * 2012 and released as an open-source project in 2015.
  * 
- * GraphQL allows clients to request exactly the data they need and nothing more.
+ * GraphQL allows clients to request exactly the data they need and nothing 
+ * more.
  * 
  * In GraphQL, clients send queries to the server specifying the structure of 
  * the data they need and the server responds with the requested data in a 
@@ -55,6 +56,92 @@ REST APIs for building more efficient, flexible, and responsive applications.
 5. npm install uuid 
 
 https://www.apollographql.com/docs/apollo-server/
+
+=================== WHAT IS SCHEMA ===============================
+
+In the context of GraphQL, a schema is a fundamental concept that defines the 
+structure of your data, the types of data you can query, and the relationships 
+between those types. It acts as a contract between the client and the server, 
+providing a clear description of the available data and how it can be accessed.
+
+A GraphQL schema is composed of three main parts:
+
+1. **Types:**
+   Types define the shape of the data that can be queried in a GraphQL API. 
+   There are several types that you can define in a schema:
+
+   - **Object Types:** Represent complex entities with fields that can be queried. 
+   For example, you might define a `Person` type with fields like `name`, `age`, 
+   and `address`.
+
+   - **Scalar Types:** Represent primitive data types, like strings, integers, floats, 
+   booleans, and more. These types have a single value and no subfields.
+
+   - **Enum Types:** Represent a specific set of allowed values. For example, 
+   you might have an `Enum` type for days of the week.
+
+   - **Input Types:** Used for passing complex arguments to mutations. They are 
+   similar to object types but can't have fields with resolver functions.
+
+2. **Fields:**
+   Fields define the properties or attributes of a type. For example, a `Person` 
+   type might have fields like `name`, `age`, and `address`.
+
+3. **Operations:**
+   Operations define how data can be retrieved or modified. In GraphQL, there are 
+   two main types of operations:
+
+   - **Queries:** Used to retrieve data. Queries are read-only operations and 
+   don't modify any data on the server.
+
+   - **Mutations:** Used to modify data. Mutations allow you to create, update,
+    or delete data on the server.
+
+In a GraphQL schema, types are connected through fields. For instance, 
+a `Person` type might have a field `address` of type `Address`, where `Address` 
+is another type in the schema.
+
+Here's a simple example of how a GraphQL schema might look:
+
+```graphql
+type Person {
+  id: ID!
+  name: String!
+  age: Int
+  address: Address
+}
+
+type Address {
+  street: String!
+  city: String!
+}
+
+type Query {
+  person(id: ID!): Person
+  allPersons: [Person!]!
+}
+
+type Mutation {
+  createPerson(name: String!, age: Int, address: AddressInput): Person
+  updatePerson(id: ID!, name: String, age: Int, address: AddressInput): Person
+  deletePerson(id: ID!): Boolean
+}
+
+input AddressInput {
+  street: String!
+  city: String!
+}
+```
+
+In this schema:
+
+- `Person` and `Address` are two object types.
+- `Query` defines available queries that clients can perform to retrieve data.
+- `Mutation` defines available mutations to modify data.
+- `AddressInput` is an input type used in mutations to provide address information.
+
+Overall, a GraphQL schema serves as a contract between the client and the 
+server, guiding how data can be queried and modified in a flexible and efficient manner.
 
 */
 
