@@ -279,3 +279,54 @@ Response:
 }
 
 */
+
+/*============== Explaination ===================
+
+The above code is a GraphQL server using the Apollo Server package in 
+Node.js. It defines a schema, resolvers, and sets up a server to handle 
+queries and mutations. I'll break down the code for you:
+
+
+1. **Imports:**
+   - `ApolloServer`: The main class from the Apollo Server package, used to create a new GraphQL server.
+   - `startStandaloneServer`: A utility function to start the standalone Apollo Server.
+
+2. **Data Mocking:**
+   - `persons`: An array containing mock data for people. Each person has a name, phone, address, and ID. This is just an example for testing purposes.
+
+3. **Schema Definition (`typeDefs`):**
+   - Defines the types, queries, and mutations of the GraphQL schema.
+   - `Address`: A custom type representing an address with `street` and `city` fields.
+   - `YesNo`: An enumeration representing 'YES' or 'NO'.
+   - `Query`: Contains the root queries that clients can execute.
+     - `personCount`: Returns the count of persons.
+     - `allPersons`: Returns all persons, optionally filtering by phone availability.
+     - `findPerson`: Finds a person by their name.
+   - `Person`: Represents a person with `name`, `phone`, `address`, and `id` fields.
+   - `Mutation`: Contains the root mutations that clients can execute.
+     - `addPerson`: Adds a new person with unique name.
+     - `editNumber`: Edits the phone number of a person.
+
+4. **Resolvers (`resolvers`):**
+   - Resolvers are JavaScript functions that define how the data for each field in the schema should be fetched or modified.
+   - `Query` resolvers:
+     - `personCount`: Returns the length of the `persons` array.
+     - `allPersons`: Returns all persons, filtered by phone availability if specified.
+     - `findPerson`: Finds a person by their name.
+   - `Person` resolver:
+     - `address`: Returns the `street` and `city` fields for the `Person` type.
+   - `Mutation` resolvers:
+     - `addPerson`: Adds a new person, checks for uniqueness, and returns the new person.
+     - `editNumber`: Edits the phone number of a person and returns the updated person.
+
+5. **Creating the Apollo Server:**
+   - Creates an instance of `ApolloServer` using the defined `typeDefs` and `resolvers`.
+
+6. **Starting the Server:**
+   - Calls `startStandaloneServer` to start the Apollo Server with configuration options.
+   - The server listens on port 4000.
+
+7. **Logging Server URL:**
+   - Once the server is started, it logs the URL where the server is running.
+
+*/
