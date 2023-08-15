@@ -199,7 +199,7 @@ startStandaloneServer(server, {
 })
 
 /*
-Examples queries:
+Example queries:
 
 query {
   personCount
